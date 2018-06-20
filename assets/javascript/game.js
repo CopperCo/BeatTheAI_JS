@@ -1,64 +1,81 @@
-// VARIABLES
-var userChoice;
-var wins = 0;
-var losses = 0;
-var guessesRemain = 9;
-var guessedByUser = [];
-var gameOver = false;
+// FUNCTIONS
+function resetBoard() {
+  guessesRemain = 9;
+  guessedByUser = [];
+  randGuess = lettersComp[Math.floor(Math.random() * lettersComp.length)];
+  console.log("Computer choice is: " + randGuess);
+}
 
-// Determine the Computers Guesses
-var lettersComp = "abcdefghijklmnopqrstuvwxyz".split("");
+function resetGame() {
+  wins = 0;
+  losses = 0;
+  resetBoard();
+  updateUI();
+}
 
-var randGuess = lettersComp[Math.floor(Math.random() * lettersComp.length)];
-console.log("Computer choice is: " + randGuess);
-
-// USER GUESS
-document.onkeyup = function(event) {
-  userChoice = event.key;
-  guessedByUser.push(userChoice);
-  console.log("User choice is: " + userChoice);
-  console.log(guessedByUser);
-
-  //Compare Guess
-
-  if (userChoice == randGuess) {
-    // alert("You guessed right");
-    wins++;
-    guessesRemain = 9;
-    guessedByUser = [];
-    console.log("User guessed right");
-  } else {
-    guessesRemain--;
-    console.log("Remaining Guesses: " + guessesRemain);
+function isValidGuess(letterString) {
+  if (lettersComp.includes(letterString)) {
+    if (guessedByUser.includes(letterString)) {
+      alert("Sadly, you already picked that letter... Try another letter.");
+      return false;
+    } else {
+      return true;
+    }
   }
+  alert("Opps... I only picked a letter in the alphabet, you should too...");
+  return false;
+}
 
-  if (guessesRemain == 0) {
-    losses++;
-    guessesRemain = 9;
-  }
-
-  if (wins == 5 || losses == 5) {
-    gameOver = true;
-  }
-
-  if (gameOver == true) {
-    location.reload();
-  }
-
-  // while (wins == 5) {
-  //   if (confirm("Play again?")) {
-  //     document.reset();
-  //   }
-  // }
-
-  // Function
-  function arrGuess() {}
-
-  // update html
+function updateUI() {
   document.getElementById("wins").innerHTML = "Wins: " + wins;
   document.getElementById("loss").innerHTML = "losses: " + losses;
   document.getElementById("remainingGuesses").innerHTML =
     "Guesses left: " + guessesRemain;
   document.getElementById("userGuess").innerHTML =
     "You've guessed so far: " + guessedByUser.toString();
+}
+
+// VARIABLES
+var userChoice;
+var wins;
+var losses;
+var guessesRemain;
+var guessedByUser;
+var lettersComp = "abcdefghijklmnopqrstuvwxyz".split("");
+var randGuess;
+
+resetGame();
+
+// USER GUESS
+document.onkeyup = function(event) {
+  userChoice = event.key.toLowerCase();
+  if (isValidGuess(userChoice)) {
+    guessedByUser.push(userChoice);
+
+    //Compare Guess
+
+    if (userChoice == randGuess) {
+      wins++;
+      resetBoard();
+    } else {
+      guessesRemain--;
+    }
+
+    if (guessesRemain == 0) {
+      losses++;
+      resetBoard();
+    }
+
+    // update html
+    updateUI();
+
+    if (wins == 5 || losses == 5) {
+      if (wins == 5) {
+        alert("Congrats you're the WINNER!");
+      } else {
+        alert("Sorry... Please comeback again!");
+      }
+      resetGame();
+    }
+  }
 };

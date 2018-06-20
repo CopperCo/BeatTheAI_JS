@@ -16,9 +16,15 @@ body {
   margin: auto;
   font-family: "Poppins", sans-serif;
   font-size: 1.2em;
+  text-align: center;
 }
 
 h1,
 h3 {
   text-align: center;
+}
+
+.scoreTable {
+  width: 30%;
+  margin: 0 auto;
 }
