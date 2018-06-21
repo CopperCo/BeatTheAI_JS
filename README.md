@@ -6,8 +6,12 @@ This is the Week 3 Homework from the UTM Full Stack Developer Bootcamp. I needed
 
 - HTML
 - CSS
-- Vanilla Javascript (Variables, Event Listeners, Functions, and If/Else Statements)
+- Vanilla Javascript
+  - Variables
+  - Event Listeners
+  - Functions
+  - If/Else Statements)
 
 ## Preview
 
-![alt text](BeatTheAiPreview.png)
+![Game Preview](BeatTheAiPreview.png)
