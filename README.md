@@ -22,6 +22,6 @@ To play click the letter you think. The trackers will show below how you faired.
 
 If you win 5 rounds you have beat the computer!
 
-##Support
+## Support
 
 If you find an error or bug please [let me know.](https://github.com/CopperCo/BeatTheAI_JS/issues)
